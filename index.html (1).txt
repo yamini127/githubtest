@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>One Network UI Test Problem</title>
+    </head>
+    <script>
+        var employeesById = {
+            "8110923": { "Name": "John Glanton", "Position": "Chief Executive", "Hire Date": "2008-01-15" },
+            "7734981": { "Name": "Samuel Chamberlain", "Position": "Sales", "Hire Date": "2012-05-01" },
+            "3400981": { "Name": "Louis Toadvine", "Position": "Customer Support", "Hire Date": "2011-08-24" },
+            "5517823": { "Name": "Ben Tobin", "Position": "Developer", "Hire Date": "2013-03-19" },
+            "4587234": { "Name": "David Brown", "Position": "Director of HR", "Hire Date": "2012-01-10" }
+        }
+
+		var keys = [];
+		var filterData = keys;
+
+		function init(){
+
+
+			for (var key in employeesById) {
+				keys.push(key);
+			}
+			filterData = keys;
+			display();
+		}
+
+		function  display(){
+			
+			for ( i =0 ; i< filterData.length; i++) {
+				var k = filterData[i];
+				var ele = employeesById[k];
+
+				document.write(
+				 '<div >' +
+				     '<table  width="500px" style="border: 2px solid black">' +
+					 '<tr>' +
+					 '<td width="300px" ><h2>' + ele.Name + "</h2></td><td style='color:green;text-align:left'>"  +  k + '</td>' +
+					 '</tr>' +
+					 '<tr><td>' + ele.Position + '<br>' +  'Employe Since  ' + 	ele['Hire Date'] + 
+					 '</td></tr>' +
+					 '</table>' + 	
+	   			 '</div><br>'
+				);
+		
+			}	
+		}
+
+		function sortBY(val){
+			alert(val);
+		}
+
+		function search(text){
+			filterData = [];
+			for ( i =0 ; i< keys.length; i++) {
+				var k = keys[i];
+				var ele = employeesById[k];
+				if(ele.Name.indexOf(text) > -1){
+					filterData.push(k);
+					//alert(ele.Name);
+				}
+			}
+			display();
+
+		}
+
+		init();
+
+    </script>
+
+    <style>
+        body {
+            padding: 10px;
+			font-family: "Arial", Times, serif;
+        }
+    </style>
+    <body>
+	  <div>
+	    Sort 
+	     <select >
+		    <option onclick="sortBY('Name')">Name</option>
+		    <option onclick="sortBY('Position')">Position</option>
+		    <option onclick="sortBY('Hire Date')" >Hire Date</option>
+		 </select>
+		 <br>
+		 Search <input name="sr" type="text" size="20" onkeyup="search(this.value)"  >
+ 	  </div>
+	  <div id="card">
+	  </div>
+    </body>
+</html>
